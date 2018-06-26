@@ -1,0 +1,59 @@
+
+
+
+<?php foreach($donnees as $donnee) : ?>
+ 
+
+
+ <div class="card mb-4">
+ 
+            <img class="card-img-top" src="<?= $url ?>upload/<?= $donnee['img_article'] ?>" alt="Card image cap">
+            <div class="card-body">
+              <h2 class="card-title">
+                <?= $donnee['title_article'] ?> 
+              </h2>
+              <p><?=$donnee['category'] ?></p>
+              <p class="card-text">
+              <?php 
+              $content = strlen($donnee['content']);
+              $resume = substr($donnee['content'], 0, 100);
+              echo $resume;
+              if ($content >= 100) {
+                
+                 echo $resume."&nbsp;&nbsp;...<br><br>";             
+
+              }
+              else{
+                echo ".";
+              }
+              ?>
+                  <a class="link" style="background-color: blue; color: white!important; padding:8px;"  href="<?=$url?>article/affiche/<?= $donnee['id_article'] ?>">
+                    En Savoir Plus
+                  </a>
+               </p>
+               
+            </div>
+            
+            <div class="card-footer text-muted">
+              Publié le,  <?php
+
+               $datepost = $donnee['date_publication'];
+           
+               $dd = substr($datepost, -11, -9);
+               $dm = substr($datepost, -14, -12);
+               $dy = substr($datepost, -27, 4);
+               $dh = substr($datepost, -9, 3);
+               $dmi = substr($datepost, -5, 2);
+
+               echo $dd."/".$dm."/".$dy." à ".$dh.":".$dmi;
+
+
+
+
+               ?> Par
+              <a style="color: black!important" href="<?= $url ?>author/affiche/<?= $donnee['id_author']?>"><?= $donnee['firstname'] ?> <?= $donnee['name'] ?></a>
+              
+            </div>
+</div>  
+<hr>
+<?php endforeach; ?>
